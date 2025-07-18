@@ -1,0 +1,5 @@
+PageBase\pageBaseClass.class
+TestBase\TestBase.class
+LoginTest\login_Test_Case.class
+Pages\FundTransfer.class
+Pages\loginPage.class
