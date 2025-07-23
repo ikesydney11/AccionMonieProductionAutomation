@@ -17,7 +17,6 @@ public class GestureUtils extends TestBase {
         public static void performSwipe(AndroidDriver driver, int startX, int startY, int endX, int endY, int holdMillis, int moveMillis) {
             PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
             Sequence swipe = new Sequence(finger, 1);
-
             swipe.addAction(finger.createPointerMove(Duration.ZERO, Origin.viewport(), startX, startY));
             swipe.addAction(finger.createPointerDown(0)); // 0 = left button or touch
             swipe.addAction(new Pause(finger, Duration.ofMillis(holdMillis)));
@@ -26,7 +25,6 @@ public class GestureUtils extends TestBase {
 
             driver.perform(Arrays.asList(swipe));
         }
-
     public static void swipeUp(AndroidDriver driver) {
         Dimension size = driver.manage().window().getSize();
         int startX = size.width / 2;
@@ -34,7 +32,6 @@ public class GestureUtils extends TestBase {
         int endY = (int) (size.height * 0.2);
         GestureUtils.performSwipe(driver, startX, startY, startX, endY, 300, 700);
     }
-
     public static void swipeDown(AndroidDriver driver) {
         Dimension size = driver.manage().window().getSize();
         int startX = size.width / 2;

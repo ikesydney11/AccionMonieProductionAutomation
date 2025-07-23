@@ -14,7 +14,7 @@ public class pageBaseClass extends TestBase {
     public static AndroidDriver driver;
     public pageBaseClass(AndroidDriver driver) {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-        TestBase.driver = driver;
+        pageBaseClass.driver = driver;
     }
 
     public static void webElementWait(WebElement element, int seconds){
