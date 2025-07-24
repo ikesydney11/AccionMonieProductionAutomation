@@ -1,34 +1,20 @@
 package Utils;
 
-import org.testng.ITestListener;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
-public class listenerClass implements ITestListener {
+public class ExtentManager {
+    public static ExtentReports extent;
 
+    public static ExtentReports getInstance() {
+        if (extent == null) {
+            ExtentSparkReporter spark = new ExtentSparkReporter("test-output/ExtentReport.html");
+            spark.config().setReportName("Automation Report");
+            spark.config().setDocumentTitle("Test Summary");
 
-    public static class TestListener implements ITestListener {
-
-        private static final Logger logger = LoggerFactory.getLogger(TestListener.class);
-        @Override
-        public void onTestStart(ITestResult result) {
-            logger.info("Test started: {}", result.getName());
+            extent = new ExtentReports();
+            extent.attachReporter(spark);
         }
-        @Override
-        public void onTestSuccess(ITestResult result) {
-            logger.info("Test passed: {}", result.getName());
-        }
-        @Override
-        public void onTestFailure(ITestResult result) {
-            logger.error("Test failed: {}", result.getName(), result.getThrowable());
-        }
-        @Override
-        public void onTestSkipped(ITestResult result) {
-            logger.warn("Test skipped: {}", result.getName());
-        }
+        return extent;
     }
-
-
 }

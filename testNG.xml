@@ -7,7 +7,7 @@
     <test name="Accion_Mobile_Production_Test">
         <classes>
             <class name="LoginTest.login_Test_Case"/>
-
+            <class name="LoginTest.Send_Money_Test_Case"/>
         </classes>
     </test>
 </suite>

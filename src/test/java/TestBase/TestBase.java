@@ -4,7 +4,9 @@ import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -16,7 +18,7 @@ public class TestBase {
     public static AppiumDriverLocalService service;;
 
 
-    @BeforeClass
+    @BeforeSuite
     public static void Capabilities() {
         caps = new DesiredCapabilities();
         caps.setCapability("platformName", "Android");
@@ -26,7 +28,7 @@ public class TestBase {
         caps.setCapability("appium:appActivity", "com.accion.mfb.accion_monie_v2.MainActivity");
         caps.setCapability("appium:noReset", false);
     }
-    @BeforeClass
+    @BeforeSuite
     public static void startServer(){
         service = new AppiumServiceBuilder()
                 .withAppiumJS(new File("C:\\Users\\iaghanchi\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
@@ -36,7 +38,7 @@ public class TestBase {
                 .withArgument(GeneralServerFlag.LOG_LEVEL, "info").build();
                  service.start();
     }
-    @BeforeClass
+    @BeforeSuite
     public void setUp() {
         startServer();
         Capabilities();
@@ -45,9 +47,13 @@ public class TestBase {
         } catch (MalformedURLException e) {
             System.out.println(e.getMessage());
         }
-        if(driver==null){
-            driver.quit();
 
         }
-    }
+        @AfterSuite
+        public void tearDown(){
+        if(driver==null){
+            driver.quit();
+        }
+
+}
 }
