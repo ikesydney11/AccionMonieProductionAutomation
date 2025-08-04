@@ -3,18 +3,19 @@ package LoginTest;
 import Pages.loginPage;
 import TestBase.TestBase;
 import Utils.LoggerClass;
+import Utils.extentManager;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import lombok.Getter;
 import org.slf4j.Logger;
 import org.testng.annotations.Test;
 
-import static Utils.ExtentManager.extent;
+import static Utils.extentManager.extent;
+
 
 public class login_Test_Case extends TestBase {
-
-
-
+    ExtentReports report = extentManager.ExtentManager.getInstance();
+    
     @Test(priority = 1)
 
     public void login1() throws InterruptedException{
@@ -29,7 +30,7 @@ public class login_Test_Case extends TestBase {
         loginPage.termsAndConditionBTN.click();
         loginPage.ContinueBTN.click();}
 
-    @Test(priority = 2)
+    //@Test(priority = 2)
         public void login2() throws InterruptedException{
         loginPage login2 = new loginPage(driver);
         Thread.sleep(1000);

@@ -1,20 +1,32 @@
 package Utils;
 
+import org.testng.ITestListener;
+import org.testng.ITestResult;
+import org.testng.ITestContext;
+
 import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
-public class ExtentManager {
-    public static ExtentReports extent;
+public class listenerClass implements ITestListener {
 
-    public static ExtentReports getInstance() {
-        if (extent == null) {
-            ExtentSparkReporter spark = new ExtentSparkReporter("test-output/ExtentReport.html");
-            spark.config().setReportName("Automation Report");
-            spark.config().setDocumentTitle("Test Summary");
+    @Override
+    public void onTestStart(ITestResult result) {
+        System.out.println(STR."Test started: \{result.getMethod().getMethodName()}");
+    }
 
-            extent = new ExtentReports();
-            extent.attachReporter(spark);
-        }
-        return extent;
+    @Override
+    public void onTestSuccess(ITestResult result) {
+        System.out.println(STR."Test passed: \{result.getMethod().getMethodName()}");
+    }
+
+    @Override
+    public void onTestFailure(ITestResult result) {
+        System.out.println(STR."Test failed: \{result.getThrowable()}");
+    }
+
+    @Override
+    public void onFinish(ITestContext context) {
+        System.out.println("Test suite finished.");
+        extentreports.getInstance().flush();
+
     }
 }
